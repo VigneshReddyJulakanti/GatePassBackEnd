@@ -27,6 +27,7 @@ const GatePassFormSchema = new Schema({
     year: {
       type: Number,
       required: true,
+      lowercase: true
     },
   },
   reason: {
@@ -60,6 +61,18 @@ const GatePassFormSchema = new Schema({
   admin_rejected: {
     type: Boolean,
     default: false,
+  },
+  sent_out:{
+    type:Boolean,
+    default:false
+  },
+  teacher_name:{
+    type:String,
+    default:""
+  },
+  administration_name:{
+    type:String,
+    default:""
   },
   teacher_message: {
     type: String,

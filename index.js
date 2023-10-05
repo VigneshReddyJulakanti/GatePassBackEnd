@@ -25,6 +25,15 @@ app.use("/api/auth/admin",require("./routes/auth/AdminAuth"))
 app.use("/api/auth/administration",require("./routes/auth/AdminstrationAuth"))
 app.use("/api/auth/teacher",require("./routes/auth/TeacherAuth"))
 app.use("/api/auth/parent",require("./routes/auth/ParentAuth"))
+app.use("/api/auth/student",require("./routes/auth/StudentAuth"))
+app.use("/api/data/student",require("./routes/data/StudentData"))
+app.use("/api/data/parent",require("./routes/data/parentData"))
+app.use("/api/data/teacher",require("./routes/data/teacherData"))
+app.use("/api/data/administration",require("./routes/data/AdministrationData"))
+app.use("/api/data/watchman",require("./routes/data/WatchManData"))
+app.use("/api/data/hod",require("./routes/data/HodData"))
+app.use("/api/auth/watchman",require("./routes/auth/WatchManAuth"))
+app.use("/api/auth/hod",require("./routes/auth/HodAuth"))
 
 
 app.post('/admin',(req,res)=>{

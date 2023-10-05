@@ -16,6 +16,7 @@ const VerifyAdministration=(req,res,next)=>{
     }
 
     var decoded = jwt.verify(token, JWT_SECRET);
+    req.user=decoded.user
     console.log(decoded)
     if(decoded.user.position!="Administration"){
        req.valid=false;

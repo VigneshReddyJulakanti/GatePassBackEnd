@@ -2,7 +2,7 @@ var jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.Super_Admin_Secret || "AdminSecret";
 
-const VerifyTeacher = (req, res, next) => {
+const VerifyParent = (req, res, next) => {
   if (req.valid != undefined && req.valid == true) {
     next();
   } else {
@@ -13,8 +13,10 @@ const VerifyTeacher = (req, res, next) => {
       }
 
       var decoded = jwt.verify(token, JWT_SECRET);
-      req.employeeid=decoded.user.employeeid
-      if (decoded.user.position != "Teacher") {
+      req.user=decoded.user
+
+      req.parentphno=decoded.user.parentphno;
+      if (decoded.user.position != "Parent") {
         req.valid = false;
       } else {
         req.valid = true;
@@ -26,4 +28,4 @@ const VerifyTeacher = (req, res, next) => {
   }
 };
 
-module.exports = VerifyTeacher;
+module.exports = VerifyParent;

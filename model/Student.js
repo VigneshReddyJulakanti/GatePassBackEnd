@@ -6,14 +6,17 @@ const ClassSchema = new Schema({
   department: {
     type: String,
     required: true,
+    lowercase: true,
   },
   section: {
     type: String,
     required: true,
+    lowercase: true,
   },
   year: {
     type: Number,
     required: true,
+    lowercase: true,
   },
 });
 
@@ -29,7 +32,7 @@ const StudentSchema = new Schema({
     required: true,
     lowercase: true,
   },
-  class: [ClassSchema],
+  class: ClassSchema,
   email: {
     type: String,
     lowercase: true,

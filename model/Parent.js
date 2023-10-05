@@ -10,7 +10,7 @@ const ParentSchema = new Schema({
     lowercase: true,
   },
   kidrollno: [{
-    type: Schema.Types.String,
+    type: String,
     ref: 'Student',
     lowercase: true,
   }],

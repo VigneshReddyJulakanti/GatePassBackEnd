@@ -2,110 +2,111 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Teacher = require("./../../model/ClassTeacher");
+const Student = require("./../../model/Student"); // Adjust the path to your Student model
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
+const VerifyTeacher=require("./../../middleware/VerifyTeacher")
 var nodemailer = require('nodemailer');
-
 router.post("/login", async (req, res) => {
-  const { employeeid, password } = req.body;
+  const { rollno, password } = req.body;
 
   try {
-    // Check if the teacher's employee ID exists
-    const teacher = await Teacher.findOne({ employeeid });
-    if (!teacher) {
+
+    // Check if the student's roll number exists
+    const student = await Student.findOne({ rollno });
+    if (!student) {
       return res.json({
         success: false,
-        message: "Invalid employee ID or password.",
+        message: "Invalid roll number or password.",
       });
     }
 
     // Compare passwords
-    const passwordMatch = await bcrypt.compare(password, teacher.password);
+    const passwordMatch = await bcrypt.compare(password, student.password);
     if (!passwordMatch) {
       return res.json({
         success: false,
-        message: "Invalid employee ID or password.",
+        message: "Invalid roll number or password.",
       });
     }
 
     // Create and sign a JWT token
-
     const data = {
-        user: {
-          position: "Teacher",
-          employeeid: teacher.employeeid
-        },
-      };
+      user: {
+        position: "Student",
+        rollno: student.rollno
+      },
+    };
     const token = jwt.sign(
       data,
-      process.env.Super_Admin_Secret,
+      process.env.Super_Admin_Secret, // Adjust this to your actual secret
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", teacher_authtoken:token });
+    return res.json({ success: true, message: "Login successful.", student_authtoken: token });
   } catch (error) {
-    console.error("Error during teacher login:", error);
+    console.error("Error during student login:", error);
     return res
       .status(500)
       .json({ success: false, message: "An error occurred during login." });
   }
 });
 
-router.post("/create", VerifySuperAdmin, VerifyAdministration ,async (req, res) => {
+router.post("/create", VerifySuperAdmin, VerifyAdministration ,VerifyTeacher,async (req, res) => {
+
 
     if (req.valid == false) {
         return res.json({
           success: false,
-          message: "Only Admin,Administration can create Teacher",
+          message: "Only Admin,Administration,Teacher can create Student",
         });
       } else {
-    const { employeeid, name, email, password, classDetails } = req.body;
+        const { rollno, name, class: { department, section, year }, email, password, parentno: { parentphno1, parentphno2 } } = req.body;
   
     try {
-      // Check if the teacher's employeeid already exists
-      const existingTeacher = await Teacher.findOne({ employeeid });
-      if (existingTeacher) {
+      // Check if a student with the same roll number already exists
+      const existingStudent = await Student.findOne({ rollno });
+      if (existingStudent) {
         return res.json({
           success: false,
           alreadyExist: true,
-          message: "Employee ID already exists.",
+          message: "Student with this roll number already exists.",
         });
       }
   
       const salt = await bcrypt.genSaltSync(8);
       const hashedPassword = await bcrypt.hashSync(password, salt);
   
-      // Create a new Teacher record with class details
-      const newTeacher = new Teacher({
-        employeeid,
+      // Create a new Student record with class details
+      const newStudent = new Student({
+        rollno,
         name,
+        class: {
+          department,
+          section,
+          year,
+        },
         email,
         password: hashedPassword,
-        class: classDetails, 
+        parentno: {
+          parentphno1,
+          parentphno2,
+        },
       });
   
-      // Save the new teacher record
-      await newTeacher.save();
-      sendMail(email,password,employeeid,name)
-      return res.json({
-        success: true,
-        message: "Teacher created successfully.",
-      });
+      await newStudent.save();
+  
+      res.json({ success: true, message: "Student registered successfully." });
 
-     
+      sendMail(email,password,rollno,name)
     } catch (error) {
-      console.error("Error creating teacher:", error);
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "An error occurred while creating teacher.",
-        });
+      console.error("Error during student registration:", error);
+      res.status(500).json({ success: false, error: "Server error." });
     }
 
 }
   });
+
 
   function sendMail(recMail,RecPassWord,rollno,name){
     var transporter = nodemailer.createTransport({
@@ -133,5 +134,9 @@ router.post("/create", VerifySuperAdmin, VerifyAdministration ,async (req, res) 
       }
     });
   }
+  
+  module.exports = router;
+  
+// Your other routes...
 
-module.exports = router;
+

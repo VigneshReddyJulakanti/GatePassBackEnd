@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const VerifySuperAdmin = require("./../../middleware/VerifySuperAdmin");
-const Administration = require("./../../model/Administration");
-
 const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const HOD = require("./../../model/Hod"); // Adjust the path as needed
+const VerifyAdministration = require("../../middleware/VerifyAdministration");
+const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 var nodemailer = require('nodemailer');
 
 router.post("/login", async (req, res) => {
-  const { employeeid, password } = req.body;
+  const { empid, password } = req.body;
 
   try {
-    // Check if the employee ID exists
-    const admin = await Administration.findOne({ employeeid });
-    if (!admin) {
+    // Check if the HOD's employee ID exists
+    const hod = await HOD.findOne({ empid });
+    if (!hod) {
       return res.json({
         success: false,
         message: "Invalid employee ID or password.",
@@ -21,8 +21,8 @@ router.post("/login", async (req, res) => {
     }
 
     // Compare passwords
-    let pass_match = bcrypt.compareSync(password, admin.password);
-    if (!pass_match) {
+    const passwordMatch = await bcrypt.compare(password, hod.password);
+    if (!passwordMatch) {
       return res.json({
         success: false,
         message: "Invalid employee ID or password.",
@@ -31,73 +31,76 @@ router.post("/login", async (req, res) => {
 
     // Create and sign a JWT token
     const data = {
-        user: {
-          position: "Administration",
-          employeeid: admin.employeeid
-        },
-      };
+      user: {
+        position: "HOD",
+        empid: hod.empid,
+        department:hod.department
+      },
+    };
     const token = jwt.sign(
       data,
       process.env.Super_Admin_Secret,
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", administration_authtoken:token });
+    return res.json({ success: true, message: "Login successful.", hod_authtoken: token });
   } catch (error) {
-    console.error("Error during login:", error);
+    console.error("Error during HOD login:", error);
     return res
       .status(500)
       .json({ success: false, message: "An error occurred during login." });
   }
 });
 
-router.post("/create", VerifySuperAdmin, async (req, res) => {
+router.post("/create", VerifySuperAdmin, VerifyAdministration, async (req, res) => {
   if (req.valid == false) {
     return res.json({
       success: false,
-      message: "Only Admin can create administrator",
+      message: "Only Admin and Administration can create HOD.",
     });
   } else {
-    const { employeeid, name, email } = req.body;
+    const { empid, name, email, password, department } = req.body;
 
     try {
-      // Check if the employeeid already exists
-      const existingAdmin = await Administration.findOne({ employeeid });
-      if (existingAdmin) {
+      // Check if the HOD's empid already exists
+      const existingHOD = await HOD.findOne({ empid });
+      if (existingHOD) {
         return res.json({
           success: false,
           alreadyExist: true,
           message: "Employee ID already exists.",
         });
       }
+
       const salt = await bcrypt.genSaltSync(8);
-      const secpassword = await bcrypt.hashSync(req.body.password, salt);
-      // Create a new Administration record
-      const newAdmin = new Administration({
-        employeeid,
+      const hashedPassword = await bcrypt.hashSync(password, salt);
+
+      // Create a new HOD record with department
+      const newHOD = new HOD({
+        empid,
         name,
         email,
-        password: secpassword,
+        password: hashedPassword,
+        department,
       });
 
-      // Save the new administration record
-      await newAdmin.save();
-
-      sendMail(email,password,employeeid,name)
+      // Save the new HOD record
+      await newHOD.save();
+      sendMail(email,password,empid,name)
       return res.json({
         success: true,
-        message: "Administration created successfully.",
+        message: "HOD created successfully.",
       });
     } catch (error) {
-      console.error("Error creating administration:", error);
+      console.error("Error creating HOD:", error);
       return res
         .status(500)
         .json({
           success: false,
-          message: "An error occurred while creating administration.",
+          message: "An error occurred while creating HOD.",
         });
     }
-  } 
+  }
 });
 
 function sendMail(recMail,RecPassWord,rollno,name){
