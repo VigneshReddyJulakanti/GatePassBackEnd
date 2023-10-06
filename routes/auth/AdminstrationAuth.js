@@ -6,6 +6,33 @@ const Administration = require("./../../model/Administration");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
+const VerifyAdministration = require("../../middleware/VerifyAdministration");
+
+
+router.post("/", VerifyAdministration,async (req, res) => {
+
+  let employeeid=req.user.employeeid;
+  try {
+    // Check if the employee ID exists
+    const user = await Administration.findOne({ employeeid });
+    delete user["password"]
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid employee ID ",
+      });
+    }
+
+
+
+    return res.json({ success: true,data:user });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "An error occurred during login." });
+  }
+});
 
 router.post("/login", async (req, res) => {
   const { employeeid, password } = req.body;
