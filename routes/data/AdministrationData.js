@@ -92,7 +92,7 @@ router.get("/", VerifyAdministration, async (req, res) => {
 
     const todayEnd = new Date();
     todayEnd.setHours(23, 59, 59, 999);
-    const forms = await GatePassForm.find({dateTime: { $gte: todayStart, $lte: todayEnd }});
+    const forms = await GatePassForm.find({dateTime: { $gte: todayStart, $lte: todayEnd },parent_accepted:true,teacher_accepted:true});
     res.json({ success: true, forms });
   } catch (error) {
     console.error(error);
