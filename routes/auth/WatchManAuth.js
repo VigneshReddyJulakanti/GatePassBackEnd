@@ -7,6 +7,20 @@ const WatchMan = require("./../../model/WatchMan"); // Adjust the path as needed
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 
+router.get("/all", VerifySuperAdmin, VerifyAdministration,async (req, res) => {
+  try {
+    // Fetch all watchmen from the database
+    const watchmen = await WatchMan.find({});
+
+    return res.json({ success: true, watchmen });
+  } catch (error) {
+    console.error("Error fetching watchmen:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching watchmen.",
+    });
+  }
+});
 router.post("/login", async (req, res) => {
   const { phno } = req.body;
 

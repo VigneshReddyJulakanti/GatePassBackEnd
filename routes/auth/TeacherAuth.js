@@ -6,13 +6,61 @@ const Teacher = require("./../../model/ClassTeacher");
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 var nodemailer = require('nodemailer');
+const VerifyTeacher = require("../../middleware/VerifyTeacher");
+const VerifyHOD = require("../../middleware/VerifyHOD");
+
+
+router.get("/all", VerifySuperAdmin, VerifySuperAdmin,VerifyHOD,VerifyAdministration, async (req, res) => {
+  try {
+    // Fetch all teachers from the database, excluding the password field
+    const teachers = await Teacher.find({}, { password: 0 });
+
+    return res.json({ success: true, teachers });
+  } catch (error) {
+    console.error("Error fetching teachers:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching teachers.",
+    });
+  }
+});
+
+
+
+
+router.post("/", VerifyTeacher ,async (req, res) => {
+
+  let employeeid=req.employeeid;
+  try {
+    // Check if the employee ID exists
+    const user = await Teacher.findOne({ employeeid });
+    delete user["password"]
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid employee ID ",
+      });
+    }
+
+
+
+    return res.json({ success: true,data:user });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "An error occurred during login." });
+  }
+});
+
+
 
 router.post("/login", async (req, res) => {
-  const { employeeid, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Check if the teacher's employee ID exists
-    const teacher = await Teacher.findOne({ employeeid });
+    const teacher = await Teacher.findOne({ email });
     if (!teacher) {
       return res.json({
         success: false,
@@ -43,7 +91,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", teacher_authtoken:token });
+    return res.json({ success: true, message: "Login successful.", authtoken:token });
   } catch (error) {
     console.error("Error during teacher login:", error);
     return res

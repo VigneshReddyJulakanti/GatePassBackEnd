@@ -6,13 +6,67 @@ const HOD = require("./../../model/Hod"); // Adjust the path as needed
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 var nodemailer = require('nodemailer');
+const VerifyHOD = require("../../middleware/VerifyHOD");
+
+
+router.get("/all", VerifySuperAdmin,VerifyAdministration, async (req, res) => {
+  if (req.valid == false) {
+    return res.json({
+      success: false,
+      message: "Wrong access",
+    });
+  }else{
+  try {
+    // Fetch all HODs from the database
+    const hods = await HOD.find({}, { password: 0 }); // Exclude the password field
+
+    return res.json({ success: true, hods });
+  } catch (error) {
+    console.error("Error fetching HODs:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching HODs.",
+    });
+  }
+}
+});
+
+router.post("/", VerifyHOD,async (req, res) => {
+
+  let empid=req.user.empid;
+  try {
+    // Check if the employee ID exists
+    const user = await HOD.findOne({ empid });
+    delete user["password"]
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid employee ID ",
+      });
+    }
+
+
+
+    return res.json({ success: true,data:user });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "An error occurred during login." });
+  }
+});
+
+
+
+
+
 
 router.post("/login", async (req, res) => {
-  const { empid, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Check if the HOD's employee ID exists
-    const hod = await HOD.findOne({ empid });
+    const hod = await HOD.findOne({ email });
     if (!hod) {
       return res.json({
         success: false,
@@ -43,7 +97,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", hod_authtoken: token });
+    return res.json({ success: true, message: "Login successful.", authtoken: token });
   } catch (error) {
     console.error("Error during HOD login:", error);
     return res

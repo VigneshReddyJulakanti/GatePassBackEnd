@@ -1,0 +1,194 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "gatepass",
+    "dateExported": "2023-10-06T12:58:15.822Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "54c49018-16a0-4d4a-985e-588fd5db17f1",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "gethod",
+            "url": "http://localhost:5000/api/auth/hod/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-10-06T04:56:59.981Z",
+            "modified": "2023-10-06T05:16:36.921Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiSE9EIiwiZW1waWQiOiJIT0QxMjM0IiwiZGVwYXJ0bWVudCI6ImVuZ2xpc2gifSwiaWF0IjoxNjk2NTY5MzU0LCJleHAiOjE2OTY2NTU3NTR9.v3LwZ9JQTO7G15E-4IJUiueqXhDq9OrRCiVtgsalNUg"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b27a2cf4-8f90-483c-afeb-deacb0abe9e6",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getTeacher",
+            "url": "http://localhost:5000/api/auth/teacher/",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-10-06T05:18:51.986Z",
+            "modified": "2023-10-06T05:25:18.154Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiVGVhY2hlciIsImVtcGxveWVlaWQiOiIxIn0sImlhdCI6MTY5NjU2OTUzNywiZXhwIjoxNjk2NjU1OTM3fQ.5y6DVdsOoxXUcqzdfkFX_oMpS6M1cHoAFRxEVgYofp4"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c438112d-e138-45d9-a1a8-1053f1ce0cdc",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getStudent",
+            "url": "http://localhost:5000/api/auth/student/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-10-06T05:32:21.044Z",
+            "modified": "2023-10-06T05:34:54.209Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiU3R1ZGVudCIsInJvbGxubyI6IjIwYmQxYTA1MnR0In0sImlhdCI6MTY5NjU3MDM1MywiZXhwIjoxNjk2NjU2NzUzfQ.gA4Uo1quumlaimeA7vkzisWM4AyBXr5YKxqGZ4MWCLY"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "600bd2ee-c98d-4a0c-92e3-85e0a6f8c5e1",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getClass",
+            "url": "http://localhost:5000/api/data/class/",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-10-06T05:42:45.475Z",
+            "modified": "2023-10-06T05:44:16.360Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d6b7d257-f0e6-4e8d-b285-28390fe4e775",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "addClass",
+            "url": "http://localhost:5000/api/data/class/add",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-10-06T05:45:46.441Z",
+            "modified": "2023-10-06T05:47:04.877Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"department\": \"Computer Science\",\r\n  \"section\": \"B\",\r\n  \"year\": 2023\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5f693df7-08fb-4e11-ad5c-1c98a4d1723c",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getAllAdministrators",
+            "url": "http://localhost:5000/api/auth/administrator/all",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-10-06T07:36:45.619Z",
+            "modified": "2023-10-06T07:37:09.450Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTY1Nzc3ODEsImV4cCI6MTY5NjY2NDE4MX0.yzvMuupvQI-5MCNjhu4_AiYena19ufjYF5mT5Xj1lMc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8b60e4d4-0571-4a0e-ba43-45c77407f1da",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getAllHod",
+            "url": "http://localhost:5000/api/auth/hod/all",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-10-06T07:38:41.588Z",
+            "modified": "2023-10-06T07:43:23.131Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTY1Nzc3ODEsImV4cCI6MTY5NjY2NDE4MX0.yzvMuupvQI-5MCNjhu4_AiYena19ufjYF5mT5Xj1lMc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0628f0ee-450e-46f4-9b8b-effd45fcc1d3",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getAllStudent",
+            "url": "http://localhost:5000/api/auth/student/all",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-10-06T07:45:30.945Z",
+            "modified": "2023-10-06T07:46:12.684Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTY1Nzc3ODEsImV4cCI6MTY5NjY2NDE4MX0.yzvMuupvQI-5MCNjhu4_AiYena19ufjYF5mT5Xj1lMc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "40ebfb26-8383-4626-a1e2-8fb71651e769",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getAllTeacher",
+            "url": "http://localhost:5000/api/auth/teacher/all",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-10-06T07:49:03.527Z",
+            "modified": "2023-10-06T07:49:34.906Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTY1Nzc3ODEsImV4cCI6MTY5NjY2NDE4MX0.yzvMuupvQI-5MCNjhu4_AiYena19ufjYF5mT5Xj1lMc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9402a451-d4c7-4b6a-8ea2-52b3442901ac",
+            "colId": "79947453-433d-4fa3-8a7a-a649d3209690",
+            "containerId": "",
+            "name": "getAllWatchman",
+            "url": "http://localhost:5000/api/auth/watchman/all",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-10-06T07:50:27.024Z",
+            "modified": "2023-10-06T07:51:10.969Z",
+            "headers": [
+                {
+                    "name": "authtoken",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTY1Nzc3ODEsImV4cCI6MTY5NjY2NDE4MX0.yzvMuupvQI-5MCNjhu4_AiYena19ufjYF5mT5Xj1lMc"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

@@ -9,6 +9,29 @@ var nodemailer = require('nodemailer');
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 
 
+router.get("/all", VerifySuperAdmin, async (req, res) => {
+  if (req.valid == false) {
+    return res.json({
+      success: false,
+      message: "Wrong access",
+    });
+  }else{
+  try {
+   
+    // Fetch all administrators from the database
+    const administrators = await Administration.find({}, { password: 0 }); // Exclude the password field
+
+    return res.json({ success: true, administrators });
+  } catch (error) {
+    console.error("Error fetching administrators:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching administrators.",
+    });
+  }
+}
+});
+
 router.post("/", VerifyAdministration,async (req, res) => {
 
   let employeeid=req.user.employeeid;
@@ -35,11 +58,11 @@ router.post("/", VerifyAdministration,async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { employeeid, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Check if the employee ID exists
-    const admin = await Administration.findOne({ employeeid });
+    const admin = await Administration.findOne({ email });
     if (!admin) {
       return res.json({
         success: false,
@@ -69,7 +92,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", administration_authtoken:token });
+    return res.json({ success: true, message: "Login successful.", authtoken:token });
   } catch (error) {
     console.error("Error during login:", error);
     return res
@@ -85,7 +108,7 @@ router.post("/create", VerifySuperAdmin, async (req, res) => {
       message: "Only Admin can create administrator",
     });
   } else {
-    const { employeeid, name, email } = req.body;
+    const { employeeid, name, email,password } = req.body;
 
     try {
       // Check if the employeeid already exists

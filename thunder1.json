@@ -1,0 +1,307 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "thunder1",
+    "dateExported": "2023-10-06T02:09:59.729Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+      {
+        "_id": "4afc5375-b47e-4be4-aaf0-298a5c0373d9",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "AdminLogin",
+        "url": "http://localhost:5000/api/auth/admin/login",
+        "method": "POST",
+        "sortNum": 10000,
+        "created": "2023-08-14T07:17:59.647Z",
+        "modified": "2023-08-14T07:18:14.803Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"email\":\"mrboom@gmail.com\",\n  \"password\":\"mrboom\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "d0db0809-2cb3-49da-ad23-63c812b51296",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "createAdminstration",
+        "url": "http://localhost:5000/api/auth/administration/create",
+        "method": "POST",
+        "sortNum": 20000,
+        "created": "2023-08-14T07:18:54.103Z",
+        "modified": "2023-08-19T06:46:49.757Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiU3VwZXJBZG1pbiJ9LCJpYXQiOjE2OTI0Mjc1ODEsImV4cCI6MTY5MjUxMzk4MX0.LJg9NKtaSLqKUxAYITK4cPXHNhg3N1SZmlLOuj2vq4A"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"employeeid\":\"2004\",\n  \"name\":\"malesh2004\",\n  \"email\":\"malesh2004@gmail.com\",\n  \"password\":\"malesh\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "5ffdb75f-fc48-48db-ae9c-989db7c4ba35",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "LoginAdministration",
+        "url": "http://localhost:5000/api/auth/administration/login",
+        "method": "POST",
+        "sortNum": 30000,
+        "created": "2023-08-14T10:26:54.288Z",
+        "modified": "2023-08-19T06:47:32.667Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n \"employeeid\":\"2004\",\n  \"password\":\"malesh\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "0c2c0c87-7a80-4870-bcb4-c498a7a9b075",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "createTeacher",
+        "url": "http://localhost:5000/api/auth/teacher/create",
+        "method": "POST",
+        "sortNum": 40000,
+        "created": "2023-08-14T10:44:08.506Z",
+        "modified": "2023-09-16T05:20:19.142Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTQ4NDA5MDAsImV4cCI6MTY5NDkyNzMwMH0.EfFwInaY8A2TVRYIgC0JaBmqJF__8H9B2uP9Z3xD_KM"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"employeeid\": \"1122\",\n  \"name\": \"Shankar\",\n  \"email\": \"vigneshreddyjulakanti@gmail.com\",\n  \"password\": \"teacherpassword\",\n  \"classDetails\": [\n    {\n      \"section\": \"C\",\n      \"department\": \"English\",\n      \"year\": 4\n    },\n    {\n      \"section\": \"B\",\n      \"department\": \"CSE\",\n      \"year\": 4\n    }\n  ]\n}\n",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "190df5f3-4d31-4028-9234-54321f3dccd3",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "LoginTeacher",
+        "url": "http://localhost:5000/api/auth/teacher/login",
+        "method": "POST",
+        "sortNum": 50000,
+        "created": "2023-08-14T11:10:15.564Z",
+        "modified": "2023-08-19T06:49:36.497Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"employeeid\": \"1\",\n    \"password\": \"teacherpassword\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "512da7b8-8385-4cab-a3ea-5961dcbb6470",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "CreateParent",
+        "url": "http://localhost:5000/api/auth/parent/create",
+        "method": "POST",
+        "sortNum": 60000,
+        "created": "2023-08-14T11:23:59.654Z",
+        "modified": "2023-08-14T12:11:11.337Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiVGVhY2hlciIsImVtcGxveWVlaWQiOiJ0MTIzIn0sImlhdCI6MTY5MjAxNTA2MiwiZXhwIjoxNjkyMTAxNDYyfQ.UFM1RCZ5slgbHcoiX9E0yBFpg8xh3mkFsTR1P-BazJ0"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"parentphno\": \"123456789\",\n  \"kidrollno\": [\"K123\", \"K124\", \"K125\"]\n}\n",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "600576c2-1985-429d-b43d-7e623876b558",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "parent_otp",
+        "url": "http://localhost:5000/api/auth/parent/send-otp",
+        "method": "POST",
+        "sortNum": 70000,
+        "created": "2023-08-15T07:55:47.032Z",
+        "modified": "2023-08-15T07:56:26.880Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"phoneNumber\":8309882962\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "0a061bec-7af6-4ba8-96be-d56c805fb448",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "parentLogin",
+        "url": "http://localhost:5000/api/auth/parent/login",
+        "method": "POST",
+        "sortNum": 80000,
+        "created": "2023-08-17T01:23:41.335Z",
+        "modified": "2023-08-17T09:51:19.249Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"parentphno\":\"6281687724\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "31a9ff58-c542-43f9-a184-04d8d5ea56a2",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "CreateStudent",
+        "url": "http://localhost:5000/api/auth/student/create",
+        "method": "POST",
+        "sortNum": 100000,
+        "created": "2023-08-17T01:57:27.252Z",
+        "modified": "2023-09-16T10:36:47.424Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiQWRtaW5pc3RyYXRpb24iLCJlbXBsb3llZWlkIjoiMjAwNCJ9LCJpYXQiOjE2OTQ4Mzk2OTUsImV4cCI6MTY5NDkyNjA5NX0.d5jw7TONg7MkTc7ZEMF9vn_KAUpBU3aSE0Bnx3da4iw"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"rollno\": \"20bd1a05BT\",\n  \"name\": \"Shashank\",\n  \"class\": {\n    \"department\": \"English\",\n    \"section\": \"C\",\n    \"year\": 4\n  },\n  \"email\": \"shashanknani1312@gmail.com\",\n  \"password\": \"andhagada\",\n  \"parentno\": {\n    \"parentphno1\": \"6281687724\",\n    \"parentphno2\": \"98765432109\"\n  }\n}\n",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "15600c08-9845-4741-a4f1-24e4fd81099a",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "LoginStudent",
+        "url": "http://localhost:5000/api/auth/student/login",
+        "method": "POST",
+        "sortNum": 110000,
+        "created": "2023-08-17T02:05:01.477Z",
+        "modified": "2023-08-19T06:51:28.668Z",
+        "headers": [],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"rollno\": \"20bd1a052tt\",\n  \"password\": \"hashed_password_here\"\n  }",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "b970d177-fbd7-40fa-bea6-5a76d0b4446c",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "createForm",
+        "url": "http://localhost:5000/api/data/student/CreateForm",
+        "method": "POST",
+        "sortNum": 120000,
+        "created": "2023-08-17T02:37:49.449Z",
+        "modified": "2023-09-06T06:14:13.817Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiU3R1ZGVudCIsInJvbGxubyI6IjIwYmQxYTA1MnR0In0sImlhdCI6MTY5Mzk4MDgzOSwiZXhwIjoxNjk0MDY3MjM5fQ.8k9f6qh6wLk_JdH15eiPdeJQvd7L7_Y6n2C1kTSYNzU"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"reason\":\"vomiting 2\"\n}",
+          "form": []
+        },
+        "tests": []
+      },
+      {
+        "_id": "a9b60f96-d04d-4ec5-b9ef-0f4f5aacec45",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "getFormStudent",
+        "url": "http://localhost:5000/api/data/student/",
+        "method": "GET",
+        "sortNum": 130000,
+        "created": "2023-08-17T03:26:49.349Z",
+        "modified": "2023-08-17T03:27:34.199Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBvc2l0aW9uIjoiU3R1ZGVudCIsInJvbGxubyI6IjIwMjMwMDEifSwiaWF0IjoxNjkyMjQwMjU5LCJleHAiOjE2OTIzMjY2NTl9.RVIWyQudYrXRZmIFai4_f1tKBOtkSjLBUocyr1ccBiI"
+          }
+        ],
+        "params": [],
+        "tests": []
+      },
+      {
+        "_id": "c89c067b-1158-4e6b-a656-6f361fcd6c68",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "getFormDataParent",
+        "url": "http://localhost:5000/api/data/parent/",
+        "method": "GET",
+        "sortNum": 140000,
+        "created": "2023-08-17T03:46:39.708Z",
+        "modified": "2023-08-19T06:53:17.963Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhcmVudHBobm8iOiI2MjgxNjg3NzI0IiwicG9zaXRpb24iOiJQYXJlbnQifSwiaWF0IjoxNjkyNDI3OTczLCJleHAiOjE2OTI1MTQzNzN9.pAsCOu7Y_9XRTKbX00LGj52uAPlijCZlykSupEwFsZE"
+          }
+        ],
+        "params": [],
+        "tests": []
+      },
+      {
+        "_id": "25a2f2be-3454-4780-9279-6518154e0065",
+        "colId": "b4b95dd8-1513-4a1c-9c2d-172c50c7b076",
+        "containerId": "",
+        "name": "AcceptFormParent",
+        "url": "http://localhost:5000/api/data/parent/accept",
+        "method": "POST",
+        "sortNum": 150000,
+        "created": "2023-08-17T04:15:22.270Z",
+        "modified": "2023-09-06T03:43:19.061Z",
+        "headers": [
+          {
+            "name": "authtoken",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhcmVudHBobm8iOiI2MjgxNjg3NzI0IiwicG9zaXRpb24iOiJQYXJlbnQifSwiaWF0IjoxNjkzOTcxNzc4LCJleHAiOjE2OTQwNTgxNzh9.DryYLbfHdBsgMbWxjxW8S2z2raX4jQ8gdRf3-fAdTnc"
+          }
+        ],
+        "params": [],
+        "body": {
+          "type": "json",
+          "raw": "{\n  \"_id\":\"64f2b4c0f900f940ce69c8c7\"\n}",
+          "form": []
+        },
+        "tests": []
+      }
+     
+    ]
+  }
+  

@@ -7,13 +7,59 @@ const VerifyAdministration = require("../../middleware/VerifyAdministration");
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 const VerifyTeacher=require("./../../middleware/VerifyTeacher")
 var nodemailer = require('nodemailer');
+const VerifyStudent = require("../../middleware/VerifyStudent");
+const VerifyHOD = require("../../middleware/VerifyHOD");
+
+router.get("/all", VerifySuperAdmin,VerifyTeacher,VerifyHOD,VerifyAdministration, async (req, res) => {
+  try {
+    // Fetch all students from the database, excluding the password field
+    const students = await Student.find({}, { password: 0 });
+
+    return res.json({ success: true, students });
+  } catch (error) {
+    console.error("Error fetching students:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching students.",
+    });
+  }
+});
+
+
+router.post("/", VerifyStudent,async (req, res) => {
+
+  let rollno=req.rollno;
+  try {
+    // Check if the employee ID exists
+    const user = await Student.findOne({ rollno });
+    delete user["password"]
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid employee ID ",
+      });
+    }
+
+
+
+    return res.json({ success: true,data:user });
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "An error occurred during login." });
+  }
+});
+
+
+
 router.post("/login", async (req, res) => {
-  const { rollno, password } = req.body;
+  const { email, password } = req.body;
 
   try {
 
     // Check if the student's roll number exists
-    const student = await Student.findOne({ rollno });
+    const student = await Student.findOne({ email });
     if (!student) {
       return res.json({
         success: false,
@@ -43,7 +89,7 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    return res.json({ success: true, message: "Login successful.", student_authtoken: token });
+    return res.json({ success: true, message: "Login successful.", authtoken: token });
   } catch (error) {
     console.error("Error during student login:", error);
     return res
@@ -52,7 +98,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/create", VerifySuperAdmin, VerifyAdministration ,VerifyTeacher,async (req, res) => {
+router.post("/create", VerifySuperAdmin, VerifyAdministration ,VerifyTeacher,VerifyHOD,async (req, res) => {
 
 
     if (req.valid == false) {
@@ -61,7 +107,7 @@ router.post("/create", VerifySuperAdmin, VerifyAdministration ,VerifyTeacher,asy
           message: "Only Admin,Administration,Teacher can create Student",
         });
       } else {
-        const { rollno, name, class: { department, section, year }, email, password, parentno: { parentphno1, parentphno2 } } = req.body;
+        const { rollno, name,  department, section, year , email, password,parentphno1, parentphno2  } = req.body;
   
     try {
       // Check if a student with the same roll number already exists

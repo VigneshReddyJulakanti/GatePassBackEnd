@@ -14,7 +14,7 @@ router.post("/login", async (req, res) => {
   ) {
     return res
       .status(400)
-      .json({ sucess: false, error: "Enter the valid credentials .   " });
+      .json({ success: false, error: "Enter the valid credentials .   " });
   }
 
   const data = {
@@ -24,7 +24,7 @@ router.post("/login", async (req, res) => {
   };
 
   var authtoken = jwt.sign(data, JWT_SECRET, { expiresIn: "1d" });
-  res.json({ sucess: true, super_admin_authtoken: authtoken });
+  res.json({ success: true, authtoken: authtoken });
 });
 
 module.exports = router;

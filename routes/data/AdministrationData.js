@@ -3,6 +3,12 @@ const router = express.Router();
 const VerifyAdministration = require("../../middleware/VerifyAdministration"); // Adjust the path to your VerifyAdministration middleware
 const GatePassForm = require("../../model/GatePassForm"); // Adjust the path to your GatePassForm model
 const Administration=require("../../model/Administration")
+
+
+
+
+
+
 // Route to accept a form (Administration)
 router.post("/accept", VerifyAdministration, async (req, res) => {
     if (req.valid == false) {
