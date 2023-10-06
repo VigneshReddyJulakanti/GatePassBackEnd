@@ -6,7 +6,7 @@ const HOD = require("./../../model/Hod"); // Adjust the path as needed
 const VerifyAdministration = require("../../middleware/VerifyAdministration");
 const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 var nodemailer = require('nodemailer');
-const VerifyHOD = require("../../middleware/VerifyHOD");
+const VerifyHOD = require("./../../middleware/VerifyHOD");
 
 
 router.get("/all", VerifySuperAdmin,VerifyAdministration, async (req, res) => {

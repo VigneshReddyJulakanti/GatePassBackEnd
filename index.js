@@ -2,9 +2,10 @@ const express=require("express")
 const mongoose=require("mongoose")
 const cors=require("cors")
 const app=express();
+const dotenv = require("dotenv");
 
-require('dotenv').config(); 
-
+// require('dotenv').config(); 
+dotenv.config();
 const mongoURI=process.env.MONGO_ID || "mongodb://localhost:27017/testing?readPreference=primary&appname=MongoDB%20Compass&ssl=false"
 const connectToMongo=async()=>{
  await mongoose.connect(mongoURI)

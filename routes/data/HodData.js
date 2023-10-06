@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Student = require("../../model/Student");
-const VerifyHOD = require("../../middleware/VerifyHOD"); // Adjust the path to your VerifyHOD middleware
+const VerifyHOD = require("./../../middleware/VerifyHOD"); // Adjust the path to your VerifyHOD middleware
 const GatePassForm = require("../../model/GatePassForm"); // Adjust the path to your GatePassForm model
 const Hod = require("../../model/Hod");
 

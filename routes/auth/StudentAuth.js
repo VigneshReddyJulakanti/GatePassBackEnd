@@ -8,7 +8,7 @@ const VerifySuperAdmin = require("../../middleware/VerifySuperAdmin");
 const VerifyTeacher=require("./../../middleware/VerifyTeacher")
 var nodemailer = require('nodemailer');
 const VerifyStudent = require("../../middleware/VerifyStudent");
-const VerifyHOD = require("../../middleware/VerifyHOD");
+const VerifyHOD = require("./../../middleware/VerifyHOD");
 
 router.get("/all", VerifySuperAdmin,VerifyTeacher,VerifyHOD,VerifyAdministration, async (req, res) => {
   try {
