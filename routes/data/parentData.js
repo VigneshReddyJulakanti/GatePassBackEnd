@@ -33,7 +33,7 @@ router.get("/", VerifyParent, async (req, res) => {
     const todayEnd = new Date();
     todayEnd.setHours(23, 59, 59, 999);
     // Find forms associated with kidrollno of the parent
-    const forms = await GatePassForm.find({ rollno: { $in: studentRolls},dateTime: { $gte: todayStart, $lte: todayEnd } });
+    const forms = await GatePassForm.find({ sent_out:false,rollno: { $in: studentRolls},dateTime: { $gte: todayStart, $lte: todayEnd } });
 
     res.json({ success: true, forms });
   } catch (error) {

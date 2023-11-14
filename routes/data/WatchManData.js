@@ -17,7 +17,8 @@ router.get("/", VerifyWatchMan, async (req, res) => {
 
     const todayEnd = new Date();
     todayEnd.setHours(23, 59, 59, 999);
-    const forms = await GatePassForm.find({dateTime: { $gte: todayStart, $lte: todayEnd } ,  teacher_accepted: true ,parent_accepted:true,admin_accepted:true});
+    const forms = await GatePassForm.find({sent_out:false,dateTime: { $gte: todayStart, $lte: todayEnd } ,  teacher_accepted: true ,parent_accepted:true,admin_accepted:true});
+    console.log(forms)
     res.json({ success: true, forms });
   } catch (error) {
     console.error(error);

@@ -69,7 +69,7 @@ router.get("/", VerifyStudent, async (req, res) => {
     const todayEnd = new Date();
     todayEnd.setHours(23, 59, 59, 999);
       // Fetch all forms submitted by the student
-      const forms = await GatePassForm.find({ rollno ,dateTime: { $gte: todayStart, $lte: todayEnd }});
+      const forms = await GatePassForm.find({sent_out:false, rollno ,dateTime: { $gte: todayStart, $lte: todayEnd }});
 
       res.json({ success: true, forms });
     } catch (error) {

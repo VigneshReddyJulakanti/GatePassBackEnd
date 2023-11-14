@@ -31,7 +31,7 @@ router.get("/", VerifyHOD, async (req, res) => {
       const todayEnd = new Date();
       todayEnd.setHours(23, 59, 59, 999);
       const forms = await GatePassForm.find({
-        rollno: { $in: studentRolls }, parent_accepted:true,dateTime: { $gte: todayStart, $lte: todayEnd }
+        sent_out:false, rollno: { $in: studentRolls }, parent_accepted:true,dateTime: { $gte: todayStart, $lte: todayEnd }
       });
 
       res.json({ success: true, forms });
